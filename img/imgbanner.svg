@@ -1,0 +1,80 @@
+<svg width="800" height="210" viewBox="0 0 800 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Halo de luz ambiental detrás del cubo -->
+    <radialGradient id="banner-ambient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9E3D" stop-opacity="0.85" />
+      <stop offset="45%" stop-color="#EA7317" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="#EA7317" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Filtro de resplandor luminoso para el cubo -->
+    <filter id="banner-cube-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur2">
+        <!-- El desenfoque de luz se expande y contrae al palpitar -->
+        <animate attributeName="stdDeviation" values="6;15;6" dur="2.2s" repeatCount="indefinite" />
+      </feGaussianBlur>
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Brillo suave para los trazos blancos -->
+    <filter id="banner-white-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fondo oscuro a juego con el logo -->
+  <rect width="800" height="210" rx="16" fill="#0B0F14" />
+  <rect x="1" y="1" width="798" height="208" rx="15" stroke="#1E293B" stroke-width="2" />
+  
+  <!-- Luz ambiental palpitante detrás del cubo -->
+  <circle cx="115" cy="105" r="82" fill="url(#banner-ambient)">
+    <animate attributeName="r" values="62;88;62" dur="2.2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.35;1;0.35" dur="2.2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Grupo centrado en (115, 105) para que palpite sin moverse de su eje -->
+  <g transform="translate(115, 105)">
+    <g>
+      <!-- Latido suave de escala -->
+      <animateTransform attributeName="transform" type="scale" values="0.97;1.04;0.97" dur="2.2s" repeatCount="indefinite" />
+
+      <!-- Cubo isométrico naranja con resplandor variable -->
+      <g transform="translate(-50, -55)" filter="url(#banner-cube-glow)">
+        <polygon points="50,4 94,29 94,81 50,106 6,81 6,29" fill="#EA7317">
+          <animate attributeName="fill" values="#D9650E;#FF9436;#D9650E" dur="2.2s" repeatCount="indefinite" />
+        </polygon>
+      </g>
+
+      <!-- Líneas blancas interiores luminosas -->
+      <g transform="translate(-50, -55)" filter="url(#banner-white-glow)">
+        <polygon points="50,13 84,32 50,51 16,32" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linejoin="round" />
+        <polygon points="13,38 46,57 46,96 13,77" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linejoin="round" />
+        <polygon points="87,38 54,57 54,96 87,77" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linejoin="round" />
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2.2s" repeatCount="indefinite" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Textos -->
+  <text x="195" y="96" fill="#F8FAFC" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" letter-spacing="-0.5">QR Studio</text>
+  
+  <text x="195" y="132" fill="#94A3B8" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="18">
+    Composición de códigos QR en local  •  <tspan fill="#EA7317" font-weight="700">RUBRITOOLS</tspan>
+  </text>
+
+  <!-- Etiquetas inferiores -->
+  <rect x="195" y="150" width="95" height="24" rx="6" fill="#161E29" stroke="#263242" />
+  <text x="242.5" y="166" fill="#CBD5E1" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" text-anchor="middle">100% Local</text>
+
+  <rect x="300" y="150" width="115" height="24" rx="6" fill="#161E29" stroke="#263242" />
+  <text x="357.5" y="166" fill="#EA7317" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Alta Precisión</text>
+</svg>

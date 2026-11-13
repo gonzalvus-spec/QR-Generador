@@ -53,7 +53,7 @@ QR-Generator/
 ├── css/
 │   └── style.css
 ├── img/
-│   └── logo.ico
+│   └── logo.png
 ├── js/
 │   ├── qr.js          # Interfaz, renderizado y exportación
 │   └── vendor/

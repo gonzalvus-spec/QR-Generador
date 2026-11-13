@@ -1,8 +1,7 @@
 <div align="center">
-  <img src="img/logo.ico" alt="QR Studio" width="96">
+  <img src="./img/imgbanner.svg" alt="QR Studio - RubriTools" width="100%" />
 </div>
-
-# QR Studio
+<br>
 
 Generador de códigos QR profesional, rápido y privado. Crea QR con degradados, distintos estilos de módulos, logotipo central o con la silueta de tu propia imagen. Todo se procesa en el navegador: no se sube nada a ningún servidor.
 

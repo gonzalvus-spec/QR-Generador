@@ -576,31 +576,26 @@
     <script src="./js/qr.js"></script>
     <script src="./js/vendor/qrcode.js"></script>
     <script src="./js/qr.js"></script>
-    <script>
-      (() => {
-        const esBadgeNetlify = (el) => {
-          if (!el || el.nodeType !== 1) return false;
-          if (['HEAD', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE'].includes(el.tagName)) return false;
-          if (el.classList.contains('app') || el.classList.contains('toast')) return false;
-          const st = getComputedStyle(el);
-          if (st.position !== 'fixed') return false;
-          const rect = el.getBoundingClientRect();
-          return rect.bottom > window.innerHeight - 80 && rect.right > window.innerWidth - 250 && rect.height < 80;
-        };
-
-        const observer = new MutationObserver((mutations) => {
-          for (const m of mutations) {
-            for (const node of m.addedNodes) {
-              if (esBadgeNetlify(node)) {
-                node.remove();
-              }
-            }
+   <script>
+  (() => {
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (
+            node.nodeType === 1 &&
+            !['HEAD', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE'].includes(node.tagName) &&
+            !node.classList.contains('app') &&
+            !node.classList.contains('toast')
+          ) {
+            const st = getComputedStyle(node);
+            if (st.position === 'fixed') node.remove();
           }
-        });
-
-        observer.observe(document.documentElement, { childList: true, subtree: true });
-      })();
-    </script>
+        }
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
 </head>
 </body>
 

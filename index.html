@@ -577,24 +577,31 @@
     <script src="./js/vendor/qrcode.js"></script>
     <script src="./js/qr.js"></script>
     <script>
-      const limpiarBadge = () => {
-        document.querySelectorAll('body > *, html > *').forEach(el => {
-          if (['HEAD', 'BODY', 'SCRIPT', 'STYLE'].includes(el.tagName)) return;
+      (() => {
+        const esBadgeNetlify = (el) => {
+          if (!el || el.nodeType !== 1) return false;
+          if (['HEAD', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE'].includes(el.tagName)) return false;
+          if (el.classList.contains('app') || el.classList.contains('toast')) return false;
           const st = getComputedStyle(el);
+          if (st.position !== 'fixed') return false;
           const rect = el.getBoundingClientRect();
-          if (
-            st.position === 'fixed' &&
-            rect.bottom > window.innerHeight - 80 &&
-            rect.right > window.innerWidth - 250 &&
-            rect.height < 80
-          ) {
-            el.remove();
+          return rect.bottom > window.innerHeight - 80 && rect.right > window.innerWidth - 250 && rect.height < 80;
+        };
+
+        const observer = new MutationObserver((mutations) => {
+          for (const m of mutations) {
+            for (const node of m.addedNodes) {
+              if (esBadgeNetlify(node)) {
+                node.remove();
+              }
+            }
           }
         });
-      };
-      limpiarBadge();
-      setInterval(limpiarBadge, 300);
+
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+      })();
     </script>
+</head>
 </body>
 
 </html>

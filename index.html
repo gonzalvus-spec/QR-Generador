@@ -24,25 +24,6 @@
         try {document.documentElement.dataset.theme = localStorage.getItem('qr-studio-theme') || 'light';} catch (e) { }
     </script>
 </head>
-<script>
-  const limpiarBadge = () => {
-    document.querySelectorAll('body > *, html > *').forEach(el => {
-      if (['HEAD', 'BODY', 'SCRIPT', 'STYLE'].includes(el.tagName)) return;
-      const st = getComputedStyle(el);
-      const rect = el.getBoundingClientRect();
-      if (
-        st.position === 'fixed' &&
-        rect.bottom > window.innerHeight - 80 &&
-        rect.right > window.innerWidth - 250 &&
-        rect.height < 80
-      ) {
-        el.remove();
-      }
-    });
-  };
-  limpiarBadge();
-  new MutationObserver(limpiarBadge).observe(document.documentElement, { childList: true, subtree: true });
-</script>
 <body>
     <div class="app">
         <header class="topbar">
@@ -593,6 +574,30 @@
 
     <script src="./js/vendor/qrcode.js"></script>
     <script src="./js/qr.js"></script>
+    <script src="./js/vendor/qrcode.js"></script>
+    <script src="./js/qr.js"></script>
+    <script>
+      const limpiarBadge = () => {
+        document.querySelectorAll('body > *, html > *').forEach(el => {
+          if (['HEAD', 'BODY', 'SCRIPT', 'STYLE'].includes(el.tagName)) return;
+          const st = getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+          if (
+            st.position === 'fixed' &&
+            rect.bottom > window.innerHeight - 80 &&
+            rect.right > window.innerWidth - 250 &&
+            rect.height < 80
+          ) {
+            el.remove();
+          }
+        });
+      };
+      limpiarBadge();
+      setInterval(limpiarBadge, 300);
+    </script>
+</body>
+
+</html>
 </body>
 
 </html>

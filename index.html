@@ -572,34 +572,29 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="./js/vendor/qrcode.js"></script>
+<script src="./js/vendor/qrcode.js"></script>
     <script src="./js/qr.js"></script>
-    <script src="./js/vendor/qrcode.js"></script>
-    <script src="./js/qr.js"></script>
-   <script>
-  (() => {
-    const observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        for (const node of m.addedNodes) {
-          if (
-            node.nodeType === 1 &&
-            !['HEAD', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE'].includes(node.tagName) &&
-            !node.classList.contains('app') &&
-            !node.classList.contains('toast')
-          ) {
-            const st = getComputedStyle(node);
-            if (st.position === 'fixed') node.remove();
-          }
-        }
-      }
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-  })();
-</script>
-</head>
-</body>
 
-</html>
+    <script>
+      (() => {
+        const observer = new MutationObserver((mutations) => {
+          for (const m of mutations) {
+            for (const node of m.addedNodes) {
+              if (
+                node.nodeType === 1 &&
+                !['HEAD', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE'].includes(node.tagName) &&
+                !node.classList.contains('app') &&
+                !node.classList.contains('toast')
+              ) {
+                const st = getComputedStyle(node);
+                if (st.position === 'fixed') node.remove();
+              }
+            }
+          }
+        });
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+      })();
+    </script>
 </body>
 
 </html>
